@@ -1,0 +1,177 @@
+<!-- <!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Evaluator</title>
+</head>
+<body>
+    <h1>Resume Evaluator</h1>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="skillset">Skillset (comma-separated):</label>
+        <input type="text" name="skillset" value="{{ skillset }}" required>
+        <br>
+        <label for="top_k">Top K Resumes (integer):</label>
+        <input type="number" name="top_k" min="1" value="5" required>
+        <br>
+        <button type="submit">Evaluate</button>
+    </form>
+
+    {% if top_resumes %}
+    <table>
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Matching Percentage</th>
+                <th>Matching Keywords</th>
+                <th>Non-Matching Keywords</th>
+                <th>Emails</th>
+                <th style="display: none;">File Path</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in top_resumes %}
+            <tr>
+                <td onclick="window.open('{{ resume.file_path }}', '_blank')">
+                    {{ resume.filename }}
+                </td>
+                <td>{{ resume.matching_percentage }}%</td>
+                <td>{{ resume.matching_keywords }}</td>
+                <td>{{ resume.non_matching_keywords }}</td>
+                <td>{{ resume.emails }}</td>
+                <td style="display: none;">{{ resume.file_path }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <script>
+        // Optional: Add more JavaScript functionality here if needed
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Evaluator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%; /* Optional: Set a table width */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px; /* Optional: Add padding for better readability */
+        }
+    </style>
+</head>
+<body>
+    <h1>Resume Evaluator</h1>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="skillset">Skillset (comma-separated):</label>
+        <input type="text" name="skillset" value="{{ skillset }}" required>
+        <br>
+        <label for="top_k">Top K Resumes (integer):</label>
+        <input type="number" name="top_k" min="1" value="5" required>
+        <br>
+        <button type="submit">Evaluate</button>
+    </form>
+
+    {% if top_resumes %}
+    <table>
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Matching Percentage</th>
+                <th>Matching Keywords</th>
+                <th>Non-Matching Keywords</th>
+                <th>Emails</th>
+                <th>File Location</th>
+                <th style="display: none;">File Path</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in top_resumes %}
+            <tr>
+
+                <td><a href="{{ url_for('show_resume', filename=resume.filename) }}" target="_blank">{{ resume.filename }}</a></td>
+                <td>{{ resume.matching_percentage }}%</td>
+                <td>{{ resume.matching_keywords }}</td>
+                <td>{{ resume.non_matching_keywords or 'None' }}</td>
+                <td>{{ resume.emails }}</td>
+                <td>{{ resume.file_path }}</td>
+                <td style="display: none;">{{ resume.file_path }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Evaluator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Resume Evaluator</h1>
+    <div class="container">
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <form method="POST">
+            <label for="skillset">Skillset (comma-separated):</label>
+            <input type="text" name="skillset" value="{{ skillset }}" required>
+            <br>
+            <label for="top_k">Top K Resumes (integer):</label>
+            <input type="number" name="top_k" min="1" value="5" required>
+            <br>
+            <button type="submit">Evaluate</button>
+        </form>
+
+        {% if top_resumes %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Matching Percentage</th>
+                        <th>Matching Keywords</th>
+                        <th>Non-Matching Keywords</th>
+                        <th>Emails</th>
+                        <!-- <th>File Location</th> -->
+                        <th style="display: none;">File Path</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resume in top_resumes %}
+                        <tr>
+                            <td><a href="{{ url_for('show_resume', filename=resume.filename) }}" target="_blank">{{ resume.filename }}</a></td>
+                            <td>{{ resume.matching_percentage }}%</td>
+                            <td>{{ resume.matching_keywords }}</td>
+                            <td>{{ resume.non_matching_keywords or 'None' }}</td>
+                            <td>{{ resume.emails }}</td>
+                            <!-- <td>{{ resume.file_path }}</td> -->
+                            <!-- <td style="display: none;">{{ resume.file_path }}</td> -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
+

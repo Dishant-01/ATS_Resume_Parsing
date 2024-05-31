@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ranked Resumes</title>
+</head>
+<body>
+  <h1>Ranked Resumes (Top {{ top_k }})</h1>
+  {% if message %}
+    <p>{{ message }}</p>  # Display message if no results found
+  {% else %}
+    <table>
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Matching Percentage</th>
+          <th>Matching Keywords</th>
+          <th>Non-Matching Keywords</th>
+          <th>Emails</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in table_rows %}
+          <tr>
+            <td>{{ row['filename'] }}</td>
+            <td>{{ row['matching_percentage'] }}%</td>
+            <td>{{ row['matching_keywords'] }}</td>
+            <td>{{ row['non_matching_keywords'] }}</td>
+            <td>{{ row['emails'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</body>
+</html>

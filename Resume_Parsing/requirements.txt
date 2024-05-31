@@ -1,0 +1,6 @@
+flask
+pandas
+# flask-datatables
+regex
+pypdf
+docx2txt
